@@ -1,11 +1,16 @@
 use crate::algorithm::Algorithm;
 use base64::DecodeError;
+use thiserror::Error;
 
-#[derive(Debug, PartialEq)]
+#[derive(Error, Debug, PartialEq)]
 pub enum Error {
+    #[error("Invalid token.")]
     InvalidToken,
+    #[error("Failed to retrieve key.")]
     RetrieveKeyFailure,
+    #[error("Unsupported algorithm: `{0:?}`.")]
     UnsupportedAlgorithm(Algorithm),
+    #[error("Token expired.")]
     Expired,
 }
 
